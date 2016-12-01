@@ -1,5 +1,6 @@
 /**
  * @fileoverview Build file
+ * @author mwiller
  */
 /*global target, exec, echo, find*/
 
@@ -67,34 +68,24 @@ target.all = function() {
 };
 
 target.lint = function() {
-
-	var code = 0;
-
 	echo('Validating JSON Files');
-	code += nodeCLI.exec('jsonlint', '-q', '-c', JSON_FILES).code;
+	nodeCLI.exec('jsonlint', '-q', '-c', JSON_FILES);
 
 	echo('Validating package.json');
-	code += nodeCLI.exec('jsonlint', 'package.json', '-q', '-V ./config/package.schema.json').code;
+	nodeCLI.exec('jsonlint', 'package.json', '-q', '-V ./config/package.schema.json');
 
 	echo('Validating JavaScript files');
-	code += nodeCLI.exec('eslint', '--fix', JS_FILES).code;
-	code += nodeCLI.exec('eslint', '--fix', './tests').code;
-
-	return code;
+	nodeCLI.exec('eslint', '--fix', JS_FILES);
 };
 
 target.test = function() {
-	var code = target.lint();
-	code += nodeCLI.exec('istanbul', 'cover', MOCHA_BINARY, '--', '-c', '-R nyan', TEST_FILES).code;
-
-	if (code) {
-		exit(code);
-	}
+	target.lint();
+	nodeCLI.exec('istanbul', 'cover', MOCHA_BINARY, '--', '-c', '-R nyan', TEST_FILES);
 };
 
 target.docs = function() {
 	echo('Generating documentation');
-	nodeCLI.exec('jsdoc', '-r', '-d ./docs/jsdoc ', JS_DIR);
+	nodeCLI.exec('jsdoc', '-r', '-d ./ ', JS_DIR);
 };
 
 target.patch = function() {

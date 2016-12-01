@@ -17,7 +17,7 @@ Includes:
 npm install --save box-node-sdk
 ```
 
-[JSDocs](https://rawgit.com/box/box-node-sdk/master/docs/jsdoc/index.html)
+[JSDocs](http://opensource.box.com/box-node-sdk/)
 
 
 Basic Usage
@@ -280,9 +280,7 @@ The following commands are available:
 Support
 -------
 
-Need to contact us directly? You can post to the
-[Box Developer Forum](https://community.box.com/t5/Developer-Forum/bd-p/DeveloperForum);
-please be sure to mention the Node.js SDK in the subject.
+Need to contact us directly? Email oss@box.com and be sure to include the name of this project in the subject.
 
 Copyright and License
 ---------------------
